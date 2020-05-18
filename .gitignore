@@ -26,6 +26,9 @@ lib-cov
 coverage
 *.lcov
 
+# Data Base
+ormconfig.json
+
 # nyc test coverage
 .nyc_output
 
