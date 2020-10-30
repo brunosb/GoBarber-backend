@@ -36,9 +36,11 @@ jobs:
       #Instalar as dependencias
       - name: Install dependencies
         run: yarn
+        
       #Executar a build
       - name: Run build
         run: yarn build
+        
       #Copiar codigo pra dentro da digitalocean
       - name: Copy code to Digital Ocean
         uses: appleboy/scp-action@master
@@ -61,6 +63,7 @@ jobs:
           script: |
             cd ~/gobarber/GoBarber-backend
             yarn
+            
       #Executar as migrations
       - name: Run Migrations on Digital Ocean
         uses: appleboy/ssh-action@master
@@ -70,6 +73,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: cd ~/gobarber/GoBarber-backend/ && ./node_modules/.bin/typeorm migration:run
+          
       #Restart no servidor nodejs
       - name: Restart server on Digital Ocean
         uses: appleboy/ssh-action@master
