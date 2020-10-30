@@ -53,7 +53,7 @@ jobs:
           target: "~/gobarber/GoBarber-backend"
       
       #Executar "yarn"
-      - name: Install dependencies and Run Migration on Digital Ocean
+      - name: Install dependencies, Run Migration and Restart Server on Digital Ocean
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -64,15 +64,4 @@ jobs:
             cd ~/gobarber/GoBarber-backend
             yarn
             ./node_modules/.bin/typeorm migration:run
-          
-      #Restart no servidor nodejs
-      - name: Restart server on Digital Ocean
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          port: ${{ secrets.SSH_PORT }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          script: pm2 restart gobarber-api
-            
-      
+            pm2 restart gobarber-api   
