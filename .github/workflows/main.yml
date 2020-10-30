@@ -69,9 +69,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           port: ${{ secrets.SSH_PORT }}
           password: ${{ secrets.SSH_PASSWORD }}
-          script: |
-            cd ~/gobarber/GoBarber-backend
-            ./node_modules/.bin/typeorm migration:run
+          script: cd ~/gobarber/GoBarber-backend/ && ./node_modules/.bin/typeorm migration:run
       #Restart no servidor nodejs
       - name: Restart server on Digital Ocean
         uses: appleboy/ssh-action@master
